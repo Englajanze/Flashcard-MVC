@@ -15,16 +15,20 @@ class Model {
         this.flashcards.push(flashcard);
     }
     editFlashcard(id, updatedQuestion, updatedAnswer) {
-        this.flashcards = this.flashcards.map((flashcard) => {
-            flashcard.id === id ? {id: flashcard.id, question: updatedQuestion, answer: updatedAnswer} : flashcard}
+       this.flashcards = this.flashcards.map((flashcard) => 
+            flashcard.id === id ? {id: flashcard.id, question: updatedQuestion, answer: updatedAnswer} : flashcard,
         )
-
+        console.log(this.flashcards)
     }
 
     deleteFlashcard(id) {
-       this.flashcards.filter((flashcard) => {
-        flashcard.id !== id
-       })
+        let index = -1
+        this.flashcards.find((flashcard, i) => {
+            if (flashcard.id === id) {
+                index = i
+            }
+        })
+       if (index > 0) this.flashcards.splice(index, 1)
     }
 }
 
