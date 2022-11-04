@@ -1,0 +1,41 @@
+.remove {
+    display: none;
+}
+
+#question-buttons-div, #answer-buttons-div {
+    position:absolute;
+    bottom:0;
+    right:0;
+    
+}
+
+#flashcard-front, #flashcard-back {
+    background-color: rgb(205, 218, 220);
+    text-align: center;
+    position:relative;
+    width: 350px;
+    height: 350px;
+    margin: auto;
+}
+
+#topic-div {
+    display: flex;
+    justify-content: center;  
+}
+
+#new-card-button {
+    border-radius: 50%;
+    padding: 20px;
+}
+
+.flashcard-pointers {
+    display: flex;
+    justify-content: center;
+}
+
+#next-arrow  {
+    margin-left: 10px;
+}
+#back-arrow  {
+    margin-right: 10px;
+}

@@ -18,7 +18,6 @@ class Model {
        this.flashcards = this.flashcards.map((flashcard) => 
             flashcard.id === id ? {id: flashcard.id, question: updatedQuestion, answer: updatedAnswer} : flashcard,
         )
-        console.log(this.flashcards)
     }
 
     deleteFlashcard(id) {
@@ -33,7 +32,15 @@ class Model {
 }
 
 class View {
-    constructor() {}
+    constructor() {
+        
+    }
+
+    getElement(selector) {
+        const element = document.querySelector(selector)
+    
+        return element
+    }
 }
 
 class Controller {
