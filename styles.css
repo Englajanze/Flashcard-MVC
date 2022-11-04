@@ -9,7 +9,7 @@
     
 }
 
-#flashcard-front, #flashcard-back {
+#flashcard {
     background-color: rgb(205, 218, 220);
     text-align: center;
     position:relative;
@@ -18,10 +18,6 @@
     margin: auto;
 }
 
-#topic-div {
-    display: flex;
-    justify-content: center;  
-}
 
 #new-card-button {
     border-radius: 50%;

@@ -33,7 +33,18 @@ class Model {
 
 class View {
     constructor() {
+        this.app = this.getElement("#root")
+
+        this.flashcardDiv = this.createElement("div", "flashcardDiv")
         
+        
+    }
+
+    createElement(tag, className) {
+        const element = document.createElement(tag)
+        if (className) element.classList.add(className)
+
+        return element
     }
 
     getElement(selector) {
