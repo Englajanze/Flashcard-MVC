@@ -2,14 +2,14 @@
     display: none;
 }
 
-#question-buttons-div, #answer-buttons-div {
+.flashcardButtonDiv {
     position:absolute;
     bottom:0;
     right:0;
     
 }
 
-#flashcard {
+.flashcardFrontDiv {
     background-color: rgb(205, 218, 220);
     text-align: center;
     position:relative;
@@ -29,9 +29,15 @@
     justify-content: center;
 }
 
-#next-arrow  {
+.arrowDiv {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.nextArrow  {
     margin-left: 10px;
 }
-#back-arrow  {
+.backArrow  {
     margin-right: 10px;
 }
