@@ -5,7 +5,10 @@ class Model {
             {id: 2, question: "Thank you", answer: "Cam on"},
             {id: 3, question: "My name is", answer: "Toi la"}
         ]
-        this.flashcard = {}
+        if (this.flashcards.length > 0) this.currentFlashcard = this.flashcards[0]
+        else false
+
+        console.log("Update")
     }
     addFlashcard(question, answer) {
         const flashcard = {
@@ -14,11 +17,14 @@ class Model {
             answer: answer
         }
         this.flashcards.push(flashcard);
+
+        this.onFlashcardChanged(this.currentFlashcard)
     }
     editFlashcard(id, updatedQuestion, updatedAnswer) {
        this.flashcards = this.flashcards.map((flashcard) => 
             flashcard.id === id ? {id: flashcard.id, question: updatedQuestion, answer: updatedAnswer} : flashcard,
         )
+        this.onFlashcardChanged(this.currentFlashcard)
     }
 
     deleteFlashcard(id) {
@@ -29,15 +35,32 @@ class Model {
             }
         })
        if (index > 0) this.flashcards.splice(index, 1)
+
+       this.onFlashcardChanged(this.currentFlashcard)
     }
 
+    
     getFlashcard(id) {
         this.flashcards.find((flashcard) => {
             if (flashcard.id === id) {
-                this.flashcard = flashcard
+                this.currentFlashcard = flashcard
             }
         })
+
+        this.onFlashcardChanged(this.currentFlashcard)
     }
+    
+    getNextFlashcard() {
+        this.currentFlashcard = this.flashcards.find((flashcard) => {
+            return flashcard.id === (this.currentFlashcard.id + 1)
+        })
+
+        this.onFlashcardChanged(this.currentFlashcard)
+    }
+
+    bindFlashcardChanged(callback) {
+        this.onFlashcardChanged = callback
+      }
 }
 
 class View {
@@ -70,13 +93,13 @@ class View {
 
     }
 
-    displayFlashcards(flashcards, flashcardsIndex) {
-        if (flashcards.length === 0) {
-            this.flashcardQuestion.innerHTML = "Add question..."
+    displayFlashcards(flashcard) {
+        if (flashcard) {
+            this.flashcardQuestion.innerHTML = flashcard.question
+            this.flashcardAnswer.innerHTML = flashcard.answer
+            this.flashcardDiv.id = flashcard.id
         } else {
-            this.flashcardQuestion.innerHTML = flashcards[flashcardsIndex].question
-            this.flashcardAnswer.innerHTML = flashcards[flashcardsIndex].answer
-            this.flashcardDiv.id = flashcards[flashcardsIndex].id
+            this.flashcardQuestion.innerHTML = "Add question..."
         }
     }
 
@@ -96,6 +119,7 @@ class View {
     bindNextArrow(handler) {
         this.nextArrow.addEventListener("click", event => {
             handler() // controller handleNextArrow
+            console.log("View.bindNextArrow")
         })
     }
 }
@@ -105,12 +129,13 @@ class Controller {
         this.model = model
         this.view = view
 
-    this.onFlashcardListChanged(this.model.flashcards, 0)
+    this.onFlashcardChanged(this.model.currentFlashcard)
     this.view.bindNextArrow(this.handleNextArrow)
+    this.model.bindFlashcardChanged(this.onFlashcardChanged)
     }
 
-    onFlashcardListChanged = (flashcards, flashcardsIndex) => {
-        this.view.displayFlashcards(flashcards, flashcardsIndex)
+    onFlashcardChanged = (flashcard) => {
+        this.view.displayFlashcards(flashcard)
     }
 
     handleAddFlashcard = (questionText, answerText) => {
@@ -126,7 +151,8 @@ class Controller {
     }
 
     handleNextArrow = () => {
-        this.onFlashcardListChanged(this.model.flashcards, 1)
+        console.log("controller.handleNextArrow")
+        this.model.getNextFlashcard()
     }
 
 }
