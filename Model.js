@@ -37,7 +37,16 @@ class Model {
         })
        if (index >= 0) {
         this.flashcards.splice(index, 1)
-        this.currentFlashcard = this.flashcards[index + 1]
+
+        console.log(this.currentFlashcard.id, this.flashcards[this.flashcards.length - 1].id)
+
+        if (this.currentFlashcard.id === this.flashcards[this.flashcards.length - 2].id) {
+            this.currentFlashcard = this.flashcards[index - 1]
+            console.log("last", this.currentFlashcard)
+        } else {
+            this.currentFlashcard = this.flashcards[index]
+            console.log(this.currentFlashcard)
+        }
         }
 
        this.onFlashcardChanged(this.currentFlashcard)
@@ -55,7 +64,11 @@ class Model {
     }
     
     getNextFlashcard() {
-        this.currentFlashcard = this.flashcards.find((flashcard) => {
+        if (this.currentFlashcard === undefined) return
+        // console.log(this.currentFlashcard.id, this.flashcards[-1].id )
+        if (this.currentFlashcard.id === this.flashcards[this.flashcards.length - 1].id) return 
+
+            this.currentFlashcard = this.flashcards.find((flashcard) => {
             return flashcard.id === (this.currentFlashcard.id + 1)
         })
 
@@ -63,6 +76,10 @@ class Model {
     }
 
     getPreviousFlashcard() {
+        if (this.currentFlashcard === undefined) return
+
+        if (this.currentFlashcard.id === this.flashcards[0].id) return 
+
         this.currentFlashcard = this.flashcards.find((flashcard) => {
             return flashcard.id === (this.currentFlashcard.id -1)
         })
@@ -130,22 +147,22 @@ class View {
     bindDeleteFlashcard(handler) {
         this.flashcardDeleteButton.addEventListener('click', event => {
             const id = parseInt(event.target.parentElement.parentElement.id)
-            console.log(id)
+            console.log(event)
             handler(id)
         })
     }
 
     bindNextArrow(handler) {
         this.nextArrow.addEventListener("click", event => {
-            handler() // controller handleNextArrow
+                handler() // controller handleNextArrow
+            
             console.log("View.bindNextArrow")
         })
     }
 
     bindPreviousArrow(handler) {
         this.backArrow.addEventListener("click", event => {
-            handler()
-            console.log("hello")
+                handler()
         } )
     }
 }
