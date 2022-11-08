@@ -28,13 +28,17 @@ class Model {
     }
 
     deleteFlashcard(id) {
+        console.log("Model deleteFlashcard", id)
         let index = -1
         this.flashcards.find((flashcard, i) => {
             if (flashcard.id === id) {
                 index = i
             }
         })
-       if (index > 0) this.flashcards.splice(index, 1)
+       if (index >= 0) {
+        this.flashcards.splice(index, 1)
+        this.currentFlashcard = this.flashcards[index + 1]
+        }
 
        this.onFlashcardChanged(this.currentFlashcard)
     }
@@ -97,7 +101,7 @@ class View {
         if (flashcard) {
             this.flashcardQuestion.innerHTML = flashcard.question
             this.flashcardAnswer.innerHTML = flashcard.answer
-            this.flashcardDiv.id = flashcard.id
+            this.flashcardFrontDiv.id = flashcard.id
         } else {
             this.flashcardQuestion.innerHTML = "Add question..."
         }
@@ -116,6 +120,14 @@ class View {
         return element
     }
 
+    bindDeleteFlashcard(handler) {
+        this.flashcardDeleteButton.addEventListener('click', event => {
+            const id = parseInt(event.target.parentElement.parentElement.id)
+            console.log(id)
+            handler(id)
+        })
+    }
+
     bindNextArrow(handler) {
         this.nextArrow.addEventListener("click", event => {
             handler() // controller handleNextArrow
@@ -132,6 +144,7 @@ class Controller {
     this.onFlashcardChanged(this.model.currentFlashcard)
     this.view.bindNextArrow(this.handleNextArrow)
     this.model.bindFlashcardChanged(this.onFlashcardChanged)
+    this.view.bindDeleteFlashcard(this.handleDeleteFlashcard)
     }
 
     onFlashcardChanged = (flashcard) => {
@@ -147,6 +160,7 @@ class Controller {
     }
 
     handleDeleteFlashcard = (id) => {
+        console.log("handleDeleteFlashcard", id)
         this.model.deleteFlashcard(id)
     }
 
