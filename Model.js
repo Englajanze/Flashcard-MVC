@@ -58,6 +58,13 @@ class Model {
         this.onFlashcardChanged(this.currentFlashcard)
     }
 
+    getPreviousFlashcard() {
+        this.currentFlashcard = this.flashcards.find((flashcard) => {
+            return flashcard.id === (this.currentFlashcard.id -1)
+        })
+        this.onFlashcardChanged(this.currentFlashcard)
+    }
+
     bindFlashcardChanged(callback) {
         this.onFlashcardChanged = callback
       }
@@ -122,6 +129,13 @@ class View {
             console.log("View.bindNextArrow")
         })
     }
+
+    bindPreviousArrow(handler) {
+        this.backArrow.addEventListener("click", event => {
+            handler()
+            console.log("hello")
+        } )
+    }
 }
 
 class Controller {
@@ -132,6 +146,7 @@ class Controller {
     this.onFlashcardChanged(this.model.currentFlashcard)
     this.view.bindNextArrow(this.handleNextArrow)
     this.model.bindFlashcardChanged(this.onFlashcardChanged)
+    this.view.bindPreviousArrow(this.handlePreviousArrow)
     }
 
     onFlashcardChanged = (flashcard) => {
@@ -155,6 +170,9 @@ class Controller {
         this.model.getNextFlashcard()
     }
 
+    handlePreviousArrow = () => {
+        this.model.getPreviousFlashcard()
+    }
 }
 
 const app = new Controller(new Model(), new View());
