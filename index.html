@@ -1,13 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
+    <script src="https://kit.fontawesome.com/11b9e2bb15.js" crossorigin="anonymous"></script>    <meta charset="UTF-8" />
     <link rel="stylesheet" href="./style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Flashcards</title>
+    
   </head>
   <body>
+    <div class="container">
+      <div class="heading">
+        <button class="home-button"><i class="fa-solid fa-house"></i></button>
+        <h1 class="topic">Topic<i class="fa-solid fa-pen"></i></h1>
+      </div>
+      <div class="top-buttons">
+        <div class="button-wrapper">
+          <p>Back to start</p>
+          <button class="display-button" id="back-start"><i class="fa-solid fa-rotate-left"></i></button>
+        </div>
+        <div>
+          <p>Shuffle</p>
+          <button class="display-button" id="shuffle"><i class="fa-solid fa-shuffle"></i></button>
+        </div>
+        <button class="new-card-btn">Add new flashcard</button>
+      </div>
+      <div class="flashcard-div">
+          <div class="flashcard-paper"></div>
+        </div>
+      <div class="arrow-buttons"></div>
+
+    </div>
+
+
+
+
+   <!--  <div class="container">
+   
     <div id="app"></div>
+      <div class="topic">
+        <button><i class="fa-solid fa-house"></i></button>
+        <h1>Topic</h1>
+      </div>
+        <div class="flashcardFrontDiv" id="3">
+          <div class="flashcard-paper">
+          <h2 class="flashcardQuestion">My name is</h2>
+          <h2 class="flashcardAnswer">Toi la</h2>
+        </div>
+          <p class="flashcardPressText">Press to see answer</p>
+          <div class="flashcardButtonDiv">
+            <button class="flashcardDeleteButton">🗑</button>
+            <button class="flashcardEditButton">🖊</button>
+          </div>
+        </div>
+        <div class="arrowDiv">
+          <button class="backArrow arrow"><i class="fa-solid fa-angle-left"></i></button>
+          <button class="nextArrow arrow"><i class="fa-solid fa-angle-right"></i></button>
+        </div>
+      </div> -->
+    
     <script type="module" src="./JS/main.js"></script>
   </body>
 </html>
