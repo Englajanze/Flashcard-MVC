@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Thambi+2:wght@600&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/11b9e2bb15.js" crossorigin="anonymous"></script>    <meta charset="UTF-8" />
     <link rel="stylesheet" href="./style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -18,14 +21,22 @@
           <p>Back to start</p>
           <button class="display-button" id="back-start"><i class="fa-solid fa-rotate-left"></i></button>
         </div>
-        <div>
+        <div class="button-wrapper">
           <p>Shuffle</p>
           <button class="display-button" id="shuffle"><i class="fa-solid fa-shuffle"></i></button>
         </div>
-        <button class="new-card-btn">Add new flashcard</button>
+        <div class="button-wrapper">
+          <p>&nbsp;</p>
+        <button class="new-card-btn">Add flashcard</button>
+      </div>
       </div>
       <div class="flashcard-div">
-          <div class="flashcard-paper"></div>
+        <div class="flashcard-paper">
+            <button class="edit-flashcard"><i class="fa-solid fa-pen"></i></button>
+            <div class="flashcard-note">
+              <div class="pattern"></div>
+            </div>
+          </div>
         </div>
       <div class="arrow-buttons"></div>
 
