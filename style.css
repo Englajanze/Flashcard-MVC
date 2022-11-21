@@ -102,14 +102,19 @@ html, body {
   height: 97%;
   width: 90%;
   display: flex;
- margin: auto;
+  flex-direction: column;
+  margin: auto;
+}
+
+.edit-div {
+  display: flex;
+  justify-content: flex-end;
 }
 
 .edit-flashcard {
-  position: absolute;
   background: none;
   border: none;
-  
+  padding: 20px;
 }
 
 
@@ -118,8 +123,7 @@ html, body {
   background-color: var(--clr-accent-200);
   height: 56%;
   width: 86%; 
-  margin: auto;
-  
+  margin: 20px auto;
 }
 
 .pattern {
@@ -132,6 +136,64 @@ html, body {
   background-position-y: 1rem;
   line-height: 2em;
 }
+
+.tape-section {
+  position: absolute;
+  width: 100%;
+}
+
+.tape-section:first-of-type {
+  top: 0;
+}
+
+.tape-section:last-of-type {
+  bottom: 0;
+}
+
+.tape-section::before,
+.tape-section::after {
+  content: "";
+  width: 15vmin;
+  height: 4vmin;
+  position: absolute;
+  background-color: var(--clr-accent-400);
+  opacity: 0.7;
+  border-right: 1px var(--clr-accent-400);
+  border-left: 1px var(--clr-accent-400);
+}
+
+.tape-section:last-of-type::after {
+  transform: rotate(-45deg);
+  right: -4vmin;
+  top: -5vmin;
+}
+
+.tape-section:first-of-type::before {
+  transform: rotate(-45deg);
+  left: -4vmin;
+  bottom: -5vmin;
+}
+
+.tape-section:first-of-type::after {
+  transform: rotate(45deg);
+  right: -4vmin;
+  top: 1vmin;
+}
+
+.tape-section:last-of-type::before {
+  transform: rotate(45deg);
+  left: -4vmin;
+  bottom: 1vmin;
+}
+
+.press-answer {
+  text-align: center;
+  font-family: 'Inter', sans-serif;
+  color: var(--clr-accent-100);
+  font-weight: 600;
+  font-size: 14px;
+}
+
 
 
 
