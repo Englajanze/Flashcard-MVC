@@ -35,6 +35,7 @@ export default class View {
             this.flashcardFrontDiv.id = flashcard.id
         } else {
             this.flashcardQuestion.innerHTML = "Add question..."
+            this.flashcardAnswer.innerHTML = ""
         }
     }
   

@@ -3,7 +3,9 @@ export default class Model {
         this.flashcards = [
             {id: 1, question: "Hello", answer: "Xin chao"},
             {id: 2, question: "Thank you", answer: "Cam on"},
-            {id: 3, question: "My name is", answer: "Toi la"}
+            {id: 3, question: "My name is", answer: "Toi la"},
+            {id: 4, question: "How are you?", answer: "Khỏe không?"},
+            {id: 5, question: "Very good, thank you", answer: "Được rồi, cảm ơn cô"}
         ]
         if (this.flashcards.length > 0) this.currentFlashcard = this.flashcards[0]
         else false
@@ -35,21 +37,17 @@ export default class Model {
                 index = i
             }
         })
-       if (index >= 0) {
-        this.flashcards.splice(index, 1)
-  
-        console.log(this.currentFlashcard.id, this.flashcards[this.flashcards.length - 1].id)
-  
-        if (this.currentFlashcard.id === this.flashcards[this.flashcards.length - 2].id) {
-            this.currentFlashcard = this.flashcards[index - 1]
-            console.log("last", this.currentFlashcard)
-        } else {
-            this.currentFlashcard = this.flashcards[index]
-            console.log(this.currentFlashcard)
+
+        if (index >= 0) {
+            this.flashcards.splice(index, 1)
+            
+            if (this.currentFlashcard == undefined) return
+            console.log(index)
+            this.currentFlashcard = this.flashcards[index] || this.flashcards[index - 1]
+            
+            
+            this.onFlashcardChanged(this.currentFlashcard)
         }
-        }
-  
-       this.onFlashcardChanged(this.currentFlashcard)
     }
   
     
