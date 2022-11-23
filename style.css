@@ -10,7 +10,7 @@
 }
 
 
-html, body {
+html, body, #app {
   height: 100%;
   width: 100%;
   margin: 0;
@@ -20,7 +20,7 @@ html, body {
   height: 100%;
   background-color: var(--clr-accent-200);
 }
-.heading {
+.header {
   width: 100%;
   background-color: var(--clr-accent-200);
   height: 16%;
