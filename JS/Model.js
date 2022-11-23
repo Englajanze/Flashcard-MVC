@@ -12,6 +12,7 @@ export default class Model {
   
         console.log("Update")
     }
+
     addFlashcard(question, answer) {
         const flashcard = {
             id: this.flashcards.length > 0 ? this.flashcards[this.flashcards.length - 1].id + 1 : 1,
@@ -21,7 +22,9 @@ export default class Model {
         this.flashcards.push(flashcard);
   
         this.onFlashcardChanged(this.currentFlashcard)
+        this.onCounterChanged(this.counterChanged())
     }
+
     editFlashcard(id, updatedQuestion, updatedAnswer) {
        this.flashcards = this.flashcards.map((flashcard) => 
             flashcard.id === id ? {id: flashcard.id, question: updatedQuestion, answer: updatedAnswer} : flashcard,
@@ -47,6 +50,7 @@ export default class Model {
             
             
             this.onFlashcardChanged(this.currentFlashcard)
+            this.onCounterChanged(this.counterChanged())
         }
     }
   
@@ -60,6 +64,20 @@ export default class Model {
   
         this.onFlashcardChanged(this.currentFlashcard)
     }
+
+    counterChanged() {
+       const counterAmount = this.flashcards.length
+       const counterCurrent = this.flashcards.indexOf(this.currentFlashcard) + 1
+       
+       return  counterCurrent + "/" + counterAmount
+    }
+
+    getFirstFlashcard() {
+        this.currentFlashcard = this.flashcards[0]
+
+        this.onFlashcardChanged(this.currentFlashcard)
+        this.onCounterChanged(this.counterChanged())
+    }
     
     getNextFlashcard() {
         if (this.currentFlashcard === undefined) return
@@ -71,6 +89,7 @@ export default class Model {
         })
   
         this.onFlashcardChanged(this.currentFlashcard)
+        this.onCounterChanged(this.counterChanged())
     }
   
     getPreviousFlashcard() {
@@ -82,9 +101,15 @@ export default class Model {
             return flashcard.id === (this.currentFlashcard.id -1)
         })
         this.onFlashcardChanged(this.currentFlashcard)
+        this.onCounterChanged(this.counterChanged())
     }
   
     bindFlashcardChanged(callback) {
         this.onFlashcardChanged = callback
       }
+
+    bindCounterChanged(callback) {
+        this.onCounterChanged = callback
+      }
   }
+

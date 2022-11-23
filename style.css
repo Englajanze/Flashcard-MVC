@@ -10,7 +10,7 @@
 }
 
 
-html, body, #app {
+html, body, #root {
   height: 100%;
   width: 100%;
   margin: 0;
@@ -112,6 +112,12 @@ html, body, #app {
   justify-content: flex-end;
 }
 
+.delete-flashcard {
+  background: none;
+  border: none;
+  font-size: 25px;
+}
+
 .edit-flashcard {
   background: none;
   border: none;
@@ -136,6 +142,10 @@ html, body, #app {
   background-size: 100% 2em;
   background-position-y: 1rem;
   line-height: 2em;
+}
+
+.answer {
+  text-align: center;
 }
 
 .question {

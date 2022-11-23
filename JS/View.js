@@ -1,6 +1,6 @@
 export default class View {
     constructor() {
-        this.app = this.getElement("#app")
+        this.app = this.getElement("#root")
   
         this.container = this.createElement("div", "container")
 
@@ -32,11 +32,15 @@ export default class View {
                 this.editDiv = this.createElement("div", "edit-div")
                     this.editFlashcardButton = this.createElement("button", "edit-flashcard")
                         this.editFlashcardButtonSymbol = this.createElement("i", ["fa-solid", "fa-pen"])
+                    this.deleteFlashcardButton = this.createElement("button", "delete-flashcard")
+                        this.deleteFlashcardButtonSymbol = this.createElement("i", ["fa-solid", "fa-trash"])
                 this.flashcardNote = this.createElement("div", "flashcard-note")
                     this.tapeSectionOne = this.createElement("div", "tape-section")
                     this.pattern = this.createElement("div", "pattern")
                         this.question = this.createElement("p", "question")
+                        this.answer = this.createElement("p", "answer")
                             this.question.innerHTML = "Thank you"
+                            this.answer.innerHTML = "Cam on"
                     this.tapeSectionTwo = this.createElement("div", "tape-section")
             this.pressForAnswer = this.createElement("p", "press-answer") 
                 this.pressForAnswer.innerHTML = "PRESS TO SEE ANSWER"   
@@ -55,10 +59,11 @@ export default class View {
                     this.backArrow.append(this.backArrowSymbol)   
                 this.arrowButtons.append(this.backArrow, this.counter, this.nextArrow)     
                           /* Flashcard */
-                   this.pattern.append(this.question) 
+                   this.pattern.append(this.question, this.answer) 
                 this.flashcardNote.append(this.tapeSectionOne, this.pattern, this.tapeSectionTwo)    
-                    this.editFlashcardButton.append(this.editFlashcardButtonSymbol)   
-                this.editDiv.append(this.editFlashcardButton)
+                    this.editFlashcardButton.append(this.editFlashcardButtonSymbol) 
+                    this.deleteFlashcardButton.append(this.deleteFlashcardButtonSymbol)  
+                this.editDiv.append(this.deleteFlashcardButton, this.editFlashcardButton)
             this.flashcardPaper.append(this.editDiv, this.flashcardNote, this.pressForAnswer)
         this.flashcardMain.append(this.flashcardPaper)        
                     /* Top Buttons */
@@ -74,44 +79,26 @@ export default class View {
         this.header.append(this.homeButton, this.topic)
     this.container.append(this.header, this.topButtons, this.flashcardMain, this.arrowButtons)
     this.app.append(this.container)
-
-
-    
-       /*  this.flashcardDiv = this.createElement("div", "flashcardDiv")
-            this.flashcardFrontDiv = this.createElement("div", "flashcardFrontDiv")
-                this.flashcardQuestion = this.createElement("h2", "flashcardQuestion")
-                this.flashcardAnswer = this.createElement("h2", "flashcardAnswer")
-                this.flashcardPressText = this.createElement("p", "flashcardPressText")
-                this.flashcardButtonDiv = this.createElement("div", "flashcardButtonDiv")
-                    this.flashcardEditButton = this.createElement("button", "flashcardEditButton")
-                        this.flashcardEditButton.innerHTML = "🖊"
-                    this.flashcardDeleteButton = this.createElement("button", "flashcardDeleteButton")
-                    this.flashcardDeleteButton.innerHTML = "🗑"
-        this.arrowDiv = this.createElement("div", "arrowDiv")
-            this.backArrow = this.createElement("button", "backArrow")
-                this.backArrow.innerHTML = "<"
-            this.nextArrow = this.createElement("button", "nextArrow")
-                this.nextArrow.innerHTML = ">"
-            
-            
-        this.flashcardButtonDiv.append(this.flashcardDeleteButton, this.flashcardEditButton)
-        this.flashcardFrontDiv.append(this.flashcardPressText, this.flashcardQuestion, this.flashcardButtonDiv, this.flashcardAnswer)
-        this.flashcardDiv.append(this.flashcardFrontDiv)
-        this.arrowDiv.append(this.backArrow, this.nextArrow)
-        this.app.append(this.flashcardDiv, this.arrowDiv)
-         */
   
     }
   
+    displayCounter(counterValues) {
+        // Counter
+        this.counter.innerHTML = counterValues
+    }
+
     displayFlashcards(flashcard) {
-       /*  if (flashcard) {
-            this.flashcardQuestion.innerHTML = flashcard.question
-            this.flashcardAnswer.innerHTML = flashcard.answer
-            this.flashcardFrontDiv.id = flashcard.id
+         if (flashcard) {
+            // Flashcard
+            this.question.innerHTML = flashcard.question
+            this.answer.innerHTML = flashcard.answer
+            this.flashcardNote.id = flashcard.id
+           
+
         } else {
             this.flashcardQuestion.innerHTML = "Add question..."
             this.flashcardAnswer.innerHTML = ""
-        } */
+        } 
     }
   // TODO: fix no className error
     createElement(tag, className) {
@@ -132,24 +119,32 @@ export default class View {
     }
   
     bindDeleteFlashcard(handler) {
-       /*  this.flashcardDeleteButton.addEventListener('click', event => {
-            const id = parseInt(event.target.parentElement.parentElement.id)
-            console.log(event)
+        this.deleteFlashcardButton.addEventListener('click', event => {
+            const id = parseInt(event.path[3].childNodes[1].id)
             handler(id)
-        }) */
+        })
     }
   
     bindNextArrow(handler) {
-       /*  this.nextArrow.addEventListener("click", event => {
+        this.nextArrow.addEventListener("click", event => {
                 handler() // controller handleNextArrow
             
             console.log("View.bindNextArrow")
-        }) */
+        })
     }
   
     bindPreviousArrow(handler) {
-        /* this.backArrow.addEventListener("click", event => {
+        this.backArrow.addEventListener("click", event => {
                 handler()
-        } ) */
+        } )
     }
+
+    bindBackToStart(handler) {
+        this.backStartButton.addEventListener("click", event => {
+            handler()
+        } )
+    }
+
+
   }
+

@@ -4,9 +4,12 @@ export default class Controller {
         this.view = view
   
     this.onFlashcardChanged(this.model.currentFlashcard)
+    this.onCounterChanged(this.model.counterChanged())
     this.view.bindNextArrow(this.handleNextArrow)
     this.model.bindFlashcardChanged(this.onFlashcardChanged)
+    this.model.bindCounterChanged(this.onCounterChanged)
     this.view.bindDeleteFlashcard(this.handleDeleteFlashcard)
+    this.view.bindBackToStart(this.handleBackToStart)
   
     this.view.bindPreviousArrow(this.handlePreviousArrow)
   
@@ -15,6 +18,12 @@ export default class Controller {
     onFlashcardChanged = (flashcard) => {
         this.view.displayFlashcards(flashcard)
     }
+    
+    onCounterChanged = (counterValues) => {
+        this.view.displayCounter(counterValues)
+    }
+
+
   
     handleAddFlashcard = (questionText, answerText) => {
         this.model.addFlashcard(questionText, answerText)
@@ -28,9 +37,12 @@ export default class Controller {
         console.log("handleDeleteFlashcard", id)
         this.model.deleteFlashcard(id)
     }
+
+    handleBackToStart = () => {
+        this.model.getFirstFlashcard()
+    }
   
     handleNextArrow = () => {
-        console.log("controller.handleNextArrow")
         this.model.getNextFlashcard()
     }
   
