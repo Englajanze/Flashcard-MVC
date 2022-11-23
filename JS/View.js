@@ -3,12 +3,15 @@ export default class View {
         this.app = this.getElement("#app")
   
         this.container = this.createElement("div", "container")
+
+                    /* Header */
         this.header = this.createElement("header", "header")
             this.homeButton = this.createElement("button", "home-button")
                 this.homeButtonSymbol = this.createElement("i", ["fa-solid", "fa-house"])
             this.topic = this.createElement("h1", "topic")
                 this.topic.innerHTML = "Topic"
                 this.topicEdit = this.createElement("i", ["fa-solid", "fa-pen"])
+                          /* Top Buttons */
         this.topButtons = this.createElement("div", "top-buttons")
             this.buttonWrapperOne = this.createElement("div", "button-wrapper")
                 this.backStartText = this.createElement("p", "back")
@@ -23,6 +26,7 @@ export default class View {
             this.buttonWrapperThree = this.createElement("div", "button-wrapper")
                 this.addFlashcardButton = this.createElement("button", "new-card-btn")
                     this.addFlashcardButton.innerHTML = "Add flashcard"
+                      /* Flashcard */
         this.flashcardMain = this.createElement("div", "flashcard-div")     
             this.flashcardPaper = this.createElement("div", "flashcard-paper")
                 this.editDiv = this.createElement("div", "edit-div")
@@ -35,11 +39,22 @@ export default class View {
                             this.question.innerHTML = "Thank you"
                     this.tapeSectionTwo = this.createElement("div", "tape-section")
             this.pressForAnswer = this.createElement("p", "press-answer") 
-                this.pressForAnswer.innerHTML = "PRESS TO SEE ANSWER"     
-                
-                    
+                this.pressForAnswer.innerHTML = "PRESS TO SEE ANSWER"   
+                          /* Arrows */  
+                this.arrowButtons = this.createElement("div", "arrow-buttons")
+                    this.backArrow = this.createElement("button", ["arrow", "back-arrow"])
+                        this.backArrowSymbol = this.createElement("i", ["fa-solid" , "fa-chevron-left"])
+                    this.counter = this.createElement("h3", "counter")
+                        this.counter.innerHTML = "1/1"
+                    this.nextArrow = this.createElement("button", ["arrow", "next-arrow"])
+                        this.nextArrowSymbol = this.createElement("i", ["fa-solid" , "fa-chevron-right"])   
 
-
+                     
+                        /* Arrows */
+                    this.nextArrow.append(this.nextArrowSymbol)
+                    this.backArrow.append(this.backArrowSymbol)   
+                this.arrowButtons.append(this.backArrow, this.counter, this.nextArrow)     
+                          /* Flashcard */
                    this.pattern.append(this.question) 
                 this.flashcardNote.append(this.tapeSectionOne, this.pattern, this.tapeSectionTwo)    
                     this.editFlashcardButton.append(this.editFlashcardButtonSymbol)   
@@ -57,7 +72,7 @@ export default class View {
             this.topic.append(this.topicEdit)
             this.homeButton.append(this.homeButtonSymbol)
         this.header.append(this.homeButton, this.topic)
-    this.container.append(this.header, this.topButtons, this.flashcardMain)
+    this.container.append(this.header, this.topButtons, this.flashcardMain, this.arrowButtons)
     this.app.append(this.container)
 
 
