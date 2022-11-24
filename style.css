@@ -194,7 +194,7 @@ html, body, #root {
   transform: rotate(-45deg);
   left: -4vmin;
   bottom: -5vmin;
-  content: "QUESTION";
+  content: attr(title);
   color: var(--clr-accent-500);
   font-size: 3vmin;
   font-family: 'Baloo Thambi 2', cursive;
@@ -211,6 +211,10 @@ html, body, #root {
   transform: rotate(45deg);
   left: -4vmin;
   bottom: 1.5vmin;
+  content: attr(title);
+  color: var(--clr-accent-500);
+  font-size: 3.5vmin;
+  font-family: 'Baloo Thambi 2', cursive;
 }
 
 .press-answer {

@@ -36,6 +36,7 @@ export default class View {
                         this.deleteFlashcardButtonSymbol = this.createElement("i", ["fa-solid", "fa-trash"])
                 this.flashcardNote = this.createElement("div", "flashcard-note")
                     this.tapeSectionOne = this.createElement("div", "tape-section")
+                        this.tapeSectionOne.title='QUESTION'
                     this.pattern = this.createElement("div", "pattern")
                         this.question = this.createElement("p", "question")
                         this.answer = this.createElement("p", ["answer", "remove"])
@@ -149,12 +150,17 @@ export default class View {
     bindPressCard(handler) {
         this.flashcardPaper.addEventListener("click", event => {
             handler()
+
             if (this.answer.classList.contains("remove")) {
                 this.answer.classList.remove("remove")
-                this.question.classList.add("remove")
+                this.question.classList.add("remove")      
+                this.tapeSectionOne.title=''
+                this.tapeSectionTwo.title='ANSWER'
             } else  {
                 this.answer.classList.add("remove")
                 this.question.classList.remove("remove")
+                this.tapeSectionOne.title='QUESTION'
+                this.tapeSectionTwo.title=''
             }
             }
         )
