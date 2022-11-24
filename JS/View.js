@@ -38,7 +38,7 @@ export default class View {
                     this.tapeSectionOne = this.createElement("div", "tape-section")
                     this.pattern = this.createElement("div", "pattern")
                         this.question = this.createElement("p", "question")
-                        this.answer = this.createElement("p", "answer")
+                        this.answer = this.createElement("p", ["answer", "remove"])
                             this.question.innerHTML = "Thank you"
                             this.answer.innerHTML = "Cam on"
                     this.tapeSectionTwo = this.createElement("div", "tape-section")
@@ -120,6 +120,7 @@ export default class View {
   
     bindDeleteFlashcard(handler) {
         this.deleteFlashcardButton.addEventListener('click', event => {
+            event.stopPropagation()
             const id = parseInt(event.path[3].childNodes[1].id)
             handler(id)
         })
@@ -144,6 +145,21 @@ export default class View {
             handler()
         } )
     }
+
+    bindPressCard(handler) {
+        this.flashcardPaper.addEventListener("click", event => {
+            handler()
+            if (this.answer.classList.contains("remove")) {
+                this.answer.classList.remove("remove")
+                this.question.classList.add("remove")
+            } else  {
+                this.answer.classList.add("remove")
+                this.question.classList.remove("remove")
+            }
+            }
+        )
+        }
+    
 
 
   }
