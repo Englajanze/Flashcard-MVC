@@ -11,7 +11,7 @@ export default class Controller {
     this.view.bindDeleteFlashcard(this.handleDeleteFlashcard)
     this.view.bindBackToStart(this.handleBackToStart)
     this.view.bindShuffle(this.handleShuffle)
-  
+    this.view.bindPressCard(this.handlePressCard)
     this.view.bindPreviousArrow(this.handlePreviousArrow)
   
     }
@@ -53,5 +53,6 @@ export default class Controller {
 
     handleShuffle = () => {
         this.model.shuffleFlashcards()
-    }
+        
+    handlePressCard = () => {}
   }

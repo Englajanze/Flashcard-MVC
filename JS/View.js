@@ -36,9 +36,10 @@ export default class View {
                         this.deleteFlashcardButtonSymbol = this.createElement("i", ["fa-solid", "fa-trash"])
                 this.flashcardNote = this.createElement("div", "flashcard-note")
                     this.tapeSectionOne = this.createElement("div", "tape-section")
+                        this.tapeSectionOne.title='QUESTION'
                     this.pattern = this.createElement("div", "pattern")
                         this.question = this.createElement("p", "question")
-                        this.answer = this.createElement("p", "answer")
+                        this.answer = this.createElement("p", ["answer", "remove"])
                             this.question.innerHTML = "Thank you"
                             this.answer.innerHTML = "Cam on"
                     this.tapeSectionTwo = this.createElement("div", "tape-section")
@@ -122,6 +123,7 @@ export default class View {
 
     bindDeleteFlashcard(handler) {
         this.deleteFlashcardButton.addEventListener('click', event => {
+            event.stopPropagation()
             const id = parseInt(event.path[3].childNodes[1].id)
             handler(id)
         })
@@ -145,11 +147,31 @@ export default class View {
         } )
     }
 
+
     bindShuffle(handler) {
         this.shuffleButton.addEventListener("click", event => {
             handler()
         } )
     }
+    
+    bindPressCard(handler) {
+        this.flashcardPaper.addEventListener("click", event => {
+            handler()
+
+            if (this.answer.classList.contains("remove")) {
+                this.answer.classList.remove("remove")
+                this.question.classList.add("remove")      
+                this.tapeSectionOne.title=''
+                this.tapeSectionTwo.title='ANSWER'
+            } else  {
+                this.answer.classList.add("remove")
+                this.question.classList.remove("remove")
+                this.tapeSectionOne.title='QUESTION'
+                this.tapeSectionTwo.title=''
+            }
+        })
+    }
+
 
 
   }
