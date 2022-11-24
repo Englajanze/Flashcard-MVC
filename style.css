@@ -195,6 +195,7 @@ html, body, #root {
   left: -4vmin;
   bottom: -5vmin;
   content: attr(title);
+  background-color: var(--bar-bg);
   color: var(--clr-accent-500);
   font-size: 3vmin;
   font-family: 'Baloo Thambi 2', cursive;
@@ -212,6 +213,7 @@ html, body, #root {
   left: -4vmin;
   bottom: 1.5vmin;
   content: attr(title);
+  background-color: var(--clr-accent-700);
   color: var(--clr-accent-500);
   font-size: 3.5vmin;
   font-family: 'Baloo Thambi 2', cursive;

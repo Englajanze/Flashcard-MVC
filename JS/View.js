@@ -156,11 +156,13 @@ export default class View {
                 this.question.classList.add("remove")      
                 this.tapeSectionOne.title=''
                 this.tapeSectionTwo.title='ANSWER'
+                this.tapeSectionTwo.style.setProperty('--clr-accent-700', 'green')
             } else  {
                 this.answer.classList.add("remove")
                 this.question.classList.remove("remove")
                 this.tapeSectionOne.title='QUESTION'
                 this.tapeSectionTwo.title=''
+                this.tapeSectionOne.style.setProperty('--clr-accent-700', 'green')
             }
             }
         )
