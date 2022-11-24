@@ -9,8 +9,6 @@ export default class Model {
         ]
         if (this.flashcards.length > 0) this.currentFlashcard = this.flashcards[0]
         else false
-  
-        console.log("Update")
     }
 
     addFlashcard(question, answer) {
@@ -34,7 +32,6 @@ export default class Model {
     }
   
     deleteFlashcard(id) {
-        console.log("Model deleteFlashcard", id)
         let index = -1
         this.flashcards.find((flashcard, i) => {
             if (flashcard.id === id) {
@@ -46,7 +43,6 @@ export default class Model {
             this.flashcards.splice(index, 1)
             
             if (this.currentFlashcard == undefined) return
-            console.log(index)
             this.currentFlashcard = this.flashcards[index] || this.flashcards[index - 1]
             
             
@@ -109,9 +105,14 @@ export default class Model {
                 array[i] = array[j];
                 array[j] = temp;
             }
+            return array;
         }
 
         this.flashcards = shuffleArray(this.flashcards)
+        this.currentFlashcard = this.flashcards[0]
+
+        this.onFlashcardChanged(this.currentFlashcard)
+        this.onCounterChanged(this.counterChanged())
     }
   
     bindFlashcardChanged(callback) {
