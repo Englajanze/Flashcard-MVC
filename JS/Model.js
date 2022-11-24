@@ -80,26 +80,21 @@ export default class Model {
     }
     
     getNextFlashcard() {
-        if (this.currentFlashcard === undefined) return
-        // console.log(this.currentFlashcard.id, this.flashcards[-1].id )
-        if (this.currentFlashcard.id === this.flashcards[this.flashcards.length - 1].id) return 
+        if (this.currentFlashcard === this.flashcards[this.flashcards.length - 1]) return
   
-            this.currentFlashcard = this.flashcards.find((flashcard) => {
-            return flashcard.id === (this.currentFlashcard.id + 1)
-        })
+        const nextFlashcardIndex = this.flashcards.indexOf(this.currentFlashcard) + 1
+        this.currentFlashcard = this.flashcards[nextFlashcardIndex]
   
         this.onFlashcardChanged(this.currentFlashcard)
         this.onCounterChanged(this.counterChanged())
     }
   
     getPreviousFlashcard() {
-        if (this.currentFlashcard === undefined) return
+        if (this.currentFlashcard === this.flashcards[0]) return 
   
-        if (this.currentFlashcard.id === this.flashcards[0].id) return 
-  
-        this.currentFlashcard = this.flashcards.find((flashcard) => {
-            return flashcard.id === (this.currentFlashcard.id -1)
-        })
+        const PreviousFlashcardIndex = this.flashcards.indexOf(this.currentFlashcard) - 1
+        this.currentFlashcard = this.flashcards[PreviousFlashcardIndex]
+
         this.onFlashcardChanged(this.currentFlashcard)
         this.onCounterChanged(this.counterChanged())
     }
