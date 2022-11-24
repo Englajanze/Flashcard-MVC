@@ -53,6 +53,7 @@ export default class Controller {
 
     handleShuffle = () => {
         this.model.shuffleFlashcards()
+    }
         
     handlePressCard = () => {}
   }
