@@ -9,8 +9,6 @@ export default class Model {
         ]
         if (this.flashcards.length > 0) this.currentFlashcard = this.flashcards[0]
         else false
-  
-        console.log("Update")
     }
 
     addFlashcard(question, answer) {
@@ -29,11 +27,11 @@ export default class Model {
        this.flashcards = this.flashcards.map((flashcard) => 
             flashcard.id === id ? {id: flashcard.id, question: updatedQuestion, answer: updatedAnswer} : flashcard,
         )
+
         this.onFlashcardChanged(this.currentFlashcard)
     }
   
     deleteFlashcard(id) {
-        console.log("Model deleteFlashcard", id)
         let index = -1
         this.flashcards.find((flashcard, i) => {
             if (flashcard.id === id) {
@@ -45,7 +43,6 @@ export default class Model {
             this.flashcards.splice(index, 1)
             
             if (this.currentFlashcard == undefined) return
-            console.log(index)
             this.currentFlashcard = this.flashcards[index] || this.flashcards[index - 1]
             
             
@@ -80,26 +77,40 @@ export default class Model {
     }
     
     getNextFlashcard() {
-        if (this.currentFlashcard === undefined) return
-        // console.log(this.currentFlashcard.id, this.flashcards[-1].id )
-        if (this.currentFlashcard.id === this.flashcards[this.flashcards.length - 1].id) return 
+        if (this.currentFlashcard === this.flashcards[this.flashcards.length - 1]) return
   
-            this.currentFlashcard = this.flashcards.find((flashcard) => {
-            return flashcard.id === (this.currentFlashcard.id + 1)
-        })
+        const nextFlashcardIndex = this.flashcards.indexOf(this.currentFlashcard) + 1
+        this.currentFlashcard = this.flashcards[nextFlashcardIndex]
   
         this.onFlashcardChanged(this.currentFlashcard)
         this.onCounterChanged(this.counterChanged())
     }
   
     getPreviousFlashcard() {
-        if (this.currentFlashcard === undefined) return
+        if (this.currentFlashcard === this.flashcards[0]) return 
   
-        if (this.currentFlashcard.id === this.flashcards[0].id) return 
-  
-        this.currentFlashcard = this.flashcards.find((flashcard) => {
-            return flashcard.id === (this.currentFlashcard.id -1)
-        })
+        const PreviousFlashcardIndex = this.flashcards.indexOf(this.currentFlashcard) - 1
+        this.currentFlashcard = this.flashcards[PreviousFlashcardIndex]
+
+        this.onFlashcardChanged(this.currentFlashcard)
+        this.onCounterChanged(this.counterChanged())
+    }
+
+    shuffleFlashcards() {
+        /* Randomize array in-place using Durstenfeld shuffle algorithm */
+        function shuffleArray(array) {
+            for (var i = array.length - 1; i > 0; i--) {
+                var j = Math.floor(Math.random() * (i + 1));
+                var temp = array[i];
+                array[i] = array[j];
+                array[j] = temp;
+            }
+            return array;
+        }
+
+        this.flashcards = shuffleArray(this.flashcards)
+        this.currentFlashcard = this.flashcards[0]
+
         this.onFlashcardChanged(this.currentFlashcard)
         this.onCounterChanged(this.counterChanged())
     }
@@ -111,5 +122,5 @@ export default class Model {
     bindCounterChanged(callback) {
         this.onCounterChanged = callback
       }
-  }
+}
 
