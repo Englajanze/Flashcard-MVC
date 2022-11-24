@@ -100,7 +100,7 @@ export default class View {
             this.flashcardAnswer.innerHTML = ""
         } 
     }
-  // TODO: fix no className error
+  // TODO: fix no className error, error when not adding a className
     createElement(tag, className) {
         const element = document.createElement(tag)
         if (className.constructor === Array) {
@@ -118,6 +118,8 @@ export default class View {
         return element
     }
   
+                /* BINDS */
+
     bindDeleteFlashcard(handler) {
         this.deleteFlashcardButton.addEventListener('click', event => {
             const id = parseInt(event.path[3].childNodes[1].id)
@@ -128,8 +130,6 @@ export default class View {
     bindNextArrow(handler) {
         this.nextArrow.addEventListener("click", event => {
                 handler() // controller handleNextArrow
-            
-            console.log("View.bindNextArrow")
         })
     }
   
@@ -141,6 +141,12 @@ export default class View {
 
     bindBackToStart(handler) {
         this.backStartButton.addEventListener("click", event => {
+            handler()
+        } )
+    }
+
+    bindShuffle(handler) {
+        this.shuffleButton.addEventListener("click", event => {
             handler()
         } )
     }
