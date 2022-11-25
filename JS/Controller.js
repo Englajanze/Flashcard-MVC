@@ -13,6 +13,8 @@ export default class Controller {
     this.view.bindShuffle(this.handleShuffle)
     this.view.bindPressCard(this.handlePressCard)
     this.view.bindPreviousArrow(this.handlePreviousArrow)
+    this.view.bindAddFlashcard(this.handleAddFlashcards)
+    this.view.bindSaveFlashcard(this.handleSaveFlashcards)
   
     }
   
@@ -35,7 +37,6 @@ export default class Controller {
     }
   
     handleDeleteFlashcard = (id) => {
-        console.log("handleDeleteFlashcard", id)
         this.model.deleteFlashcard(id)
     }
 
@@ -56,4 +57,11 @@ export default class Controller {
     }
         
     handlePressCard = () => {}
-  }
+
+    handleSaveFlashcards = (flashcardQuestion, flashcardAnswer) => {
+        console.log("handleAddFlashcards", flashcardQuestion, flashcardAnswer)
+        this.model.addFlashcard(flashcardQuestion, flashcardAnswer)
+    }
+
+    handleAddFlashcards = () => {}
+}

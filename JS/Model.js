@@ -17,7 +17,9 @@ export default class Model {
             question: question,
             answer: answer
         }
-        this.flashcards.push(flashcard);
+        this.flashcards.push(flashcard)
+
+        this.currentFlashcard = flashcard
   
         this.onFlashcardChanged(this.currentFlashcard)
         this.onCounterChanged(this.counterChanged())

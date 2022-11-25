@@ -1,5 +1,7 @@
 export default class View {
     constructor() {
+        let stopPressCard = false;
+
         this.app = this.getElement("#root")
   
         this.container = this.createElement("div", "container")
@@ -9,8 +11,8 @@ export default class View {
             this.homeButton = this.createElement("button", "home-button")
                 this.homeButtonSymbol = this.createElement("i", ["fa-solid", "fa-house"])
             this.topic = this.createElement("h1", "topic")
-                this.topic.innerHTML = "Topic"
-                this.topicEdit = this.createElement("i", ["fa-solid", "fa-pen"])
+                this.topic.innerHTML = "Flashcards"
+              //  this.topicEdit = this.createElement("i", ["fa-solid", "fa-pen"])
                           /* Top Buttons */
         this.topButtons = this.createElement("div", "top-buttons")
             this.buttonWrapperOne = this.createElement("div", "button-wrapper")
@@ -24,16 +26,18 @@ export default class View {
                 this.shuffleButton = this.createElement("button", "display-button")
                     this.shuffleButtonSymbol = this.createElement("i", ["fa-solid", "fa-shuffle"])
             this.buttonWrapperThree = this.createElement("div", "button-wrapper")
-                this.addFlashcardButton = this.createElement("button", "new-card-btn")
+                this.addFlashcardButton = this.createElement("button", "primary-btn")
                     this.addFlashcardButton.innerHTML = "Add flashcard"
                       /* Flashcard */
         this.flashcardMain = this.createElement("div", "flashcard-div")     
             this.flashcardPaper = this.createElement("div", "flashcard-paper")
                 this.editDiv = this.createElement("div", "edit-div")
+                    this.deleteFlashcardButton = this.createElement("button", ["delete-btn", "primary-btn", "remove"])
+                        this.deleteFlashcardButton.innerHTML = "Delete"
+                        this.saveButton = this.createElement("button", ["save-btn", "primary-btn", "remove"])
+                            this.saveButton.innerHTML = "Save"
                     this.editFlashcardButton = this.createElement("button", "edit-flashcard")
                         this.editFlashcardButtonSymbol = this.createElement("i", ["fa-solid", "fa-pen"])
-                    this.deleteFlashcardButton = this.createElement("button", "delete-flashcard")
-                        this.deleteFlashcardButtonSymbol = this.createElement("i", ["fa-solid", "fa-trash"])
                 this.flashcardNote = this.createElement("div", "flashcard-note")
                     this.tapeSectionOne = this.createElement("div", ["tape-section", "tape-section-color"])
                         this.tapeSectionOne.title='QUESTION'
@@ -63,8 +67,7 @@ export default class View {
                    this.pattern.append(this.question, this.answer) 
                 this.flashcardNote.append(this.tapeSectionOne, this.pattern, this.tapeSectionTwo)    
                     this.editFlashcardButton.append(this.editFlashcardButtonSymbol) 
-                    this.deleteFlashcardButton.append(this.deleteFlashcardButtonSymbol)  
-                this.editDiv.append(this.deleteFlashcardButton, this.editFlashcardButton)
+                this.editDiv.append(this.deleteFlashcardButton,  this.saveButton , this.editFlashcardButton)
             this.flashcardPaper.append(this.editDiv, this.flashcardNote, this.pressForAnswer)
         this.flashcardMain.append(this.flashcardPaper)        
                     /* Top Buttons */
@@ -75,7 +78,7 @@ export default class View {
         this.buttonWrapperOne.append(this.backStartText, this.backStartButton)
         this.topButtons.append(this.buttonWrapperOne , this.buttonWrapperTwo, this.buttonWrapperThree)
                     /* Header */    
-            this.topic.append(this.topicEdit)
+         //   this.topic.append(this.topicEdit)
             this.homeButton.append(this.homeButtonSymbol)
         this.header.append(this.homeButton, this.topic)
     this.container.append(this.header, this.topButtons, this.flashcardMain, this.arrowButtons)
@@ -101,6 +104,15 @@ export default class View {
             this.flashcardAnswer.innerHTML = ""
         } 
     }
+
+  /*   get _flashcardQuestion() {
+        return this.question.value
+    }
+
+    get _flashcardAnswer() {
+        return this.answer.value
+    } */
+
   // TODO: fix no className error, error when not adding a className
     createElement(tag, className) {
         const element = document.createElement(tag)
@@ -158,6 +170,8 @@ export default class View {
         this.flashcardPaper.addEventListener("click", event => {
             handler()
 
+            if (this.stopPressCard) return 
+
             if (this.answer.classList.contains("remove")) {
                 this.answer.classList.remove("remove")
                 this.question.classList.add("remove")      
@@ -165,6 +179,7 @@ export default class View {
                 this.tapeSectionTwo.title='ANSWER'
                 this.tapeSectionTwo.classList.add("tape-section-color")
                 this.tapeSectionOne.classList.remove("tape-section-color")
+                this.pressForAnswer.innerHTML = "PRESS TO SEE QUESTION"
 
             } else  {
                 this.answer.classList.add("remove")
@@ -173,7 +188,46 @@ export default class View {
                 this.tapeSectionTwo.title=''
                 this.tapeSectionOne.classList.add("tape-section-color")
                 this.tapeSectionTwo.classList.remove("tape-section-color")
+                this.pressForAnswer.innerHTML = "PRESS TO SEE ANSWER"
             }
+        })
+    }
+
+    bindAddFlashcard(handler) {
+        this.addFlashcardButton.addEventListener("click", event => {
+            handler()
+            this.stopPressCard = true;
+            this.question.classList.add("align-text-edit")
+            this.question.innerHTML = "Question"
+            this.answer.classList.add("align-text-edit")
+            this.answer.innerHTML = "Answer"
+            this.answer.classList.remove("remove")
+            this.question.classList.remove("remove")
+            this.pressForAnswer.innerHTML = "PRESS QUESTION AND ANSWER TO WRITE"
+            this.editFlashcardButton.classList.add("remove")
+            this.deleteFlashcardButton.classList.remove("remove")
+            this.saveButton.classList.remove("remove")
+            this.question.contentEditable = "true"
+            this.answer.contentEditable = "true"
+        })
+    }
+
+    bindSaveFlashcard(handler) {
+        this.saveButton.addEventListener("click", event => {
+            console.log(this.question)
+                handler(this.question.value, this.answer.value)
+
+            this.stopPressCard = false;
+            this.question.classList.remove("align-text-edit")
+            this.answer.classList.remove("align-text-edit")
+            this.answer.classList.add("remove")
+            this.question.classList.add("remove")
+            this.pressForAnswer.innerHTML = "PRESS TO SEE ANSWER"
+            this.editFlashcardButton.classList.remove("remove")
+            this.deleteFlashcardButton.classList.add("remove")
+            this.saveButton.classList.add("remove")
+            this.question.contentEditable = "false"
+            this.answer.contentEditable = "false"
         })
     }
 
