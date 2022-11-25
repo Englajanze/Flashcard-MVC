@@ -35,7 +35,7 @@ export default class View {
                     this.deleteFlashcardButton = this.createElement("button", "delete-flashcard")
                         this.deleteFlashcardButtonSymbol = this.createElement("i", ["fa-solid", "fa-trash"])
                 this.flashcardNote = this.createElement("div", "flashcard-note")
-                    this.tapeSectionOne = this.createElement("div", "tape-section")
+                    this.tapeSectionOne = this.createElement("div", ["tape-section", "tape-section-color"])
                         this.tapeSectionOne.title='QUESTION'
                     this.pattern = this.createElement("div", "pattern")
                         this.question = this.createElement("p", "question")
@@ -163,17 +163,19 @@ export default class View {
                 this.question.classList.add("remove")      
                 this.tapeSectionOne.title=''
                 this.tapeSectionTwo.title='ANSWER'
-                this.tapeSectionTwo.style.setProperty('--clr-accent-700', 'green')
+                this.tapeSectionTwo.classList.add("tape-section-color")
+                this.tapeSectionOne.classList.remove("tape-section-color")
+
             } else  {
                 this.answer.classList.add("remove")
                 this.question.classList.remove("remove")
                 this.tapeSectionOne.title='QUESTION'
                 this.tapeSectionTwo.title=''
-                this.tapeSectionOne.style.setProperty('--clr-accent-700', 'green')
+                this.tapeSectionOne.classList.add("tape-section-color")
+                this.tapeSectionTwo.classList.remove("tape-section-color")
             }
         })
     }
-
 
 
   }

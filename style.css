@@ -7,6 +7,7 @@
   --clr-accent-400: rgba(196, 210, 210, 1);
   --clr-accent-500: rgba(31, 80, 36, 1);
   --clr-accent-600: rgba(0, 0, 0, 1);
+  --clr-accent-700: rgb(115, 173, 173);
 }
 
 
@@ -195,10 +196,17 @@ html, body, #root {
   left: -4vmin;
   bottom: -5vmin;
   content: attr(title);
-  background-color: var(--bar-bg);
   color: var(--clr-accent-500);
   font-size: 3vmin;
   font-family: 'Baloo Thambi 2', cursive;
+}
+
+.tape-section-color:first-of-type::before {
+  background-color: var(--clr-accent-700);
+}
+
+.tape-section-color:last-of-type::before {
+  background-color: var(--clr-accent-700);
 }
 
 
@@ -213,7 +221,6 @@ html, body, #root {
   left: -4vmin;
   bottom: 1.5vmin;
   content: attr(title);
-  background-color: var(--clr-accent-700);
   color: var(--clr-accent-500);
   font-size: 3.5vmin;
   font-family: 'Baloo Thambi 2', cursive;
