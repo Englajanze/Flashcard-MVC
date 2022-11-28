@@ -290,3 +290,24 @@ html, body, #root {
 .save-btn {
   background-color: rgb(88, 88, 226);
 }
+
+@media (min-width: 1200px) {
+  .flashcard-div {
+    height: 60%;
+  }
+  .flashcard-paper {
+    width: 50%;
+    height: 100%;
+  }
+  .arrow-buttons {
+    justify-content: center;
+  }
+  .arrow {
+    margin: 100px;
+  }
+  .top-buttons {
+    width: 50%;
+    margin: auto;
+    justify-content: space-between;
+  }
+  }

@@ -15,6 +15,7 @@ export default class Controller {
     this.view.bindPreviousArrow(this.handlePreviousArrow)
     this.view.bindAddFlashcard(this.handleAddFlashcards)
     this.view.bindSaveFlashcard(this.handleSaveFlashcards)
+    this.view.bindEditFlashcard(this.handleEditFlashcard)
   
     }
   
@@ -64,4 +65,5 @@ export default class Controller {
     }
 
     handleAddFlashcards = () => {}
+
 }

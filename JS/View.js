@@ -136,8 +136,22 @@ export default class View {
     bindDeleteFlashcard(handler) {
         this.deleteFlashcardButton.addEventListener('click', event => {
             event.stopPropagation()
-            const id = parseInt(event.path[3].childNodes[1].id)
-            handler(id)
+              const id = parseInt(event.path[2].childNodes[1].id)
+             handler(id)
+            console.log(event)
+
+            this.stopPressCard = false;
+            this.question.classList.remove("align-text-edit")
+            this.answer.classList.remove("align-text-edit")
+            this.pressForAnswer.innerHTML = "PRESS TO SEE ANSWER"
+            this.editFlashcardButton.classList.remove("remove")
+            this.deleteFlashcardButton.classList.add("remove")
+            this.saveButton.classList.add("remove")
+            this.question.contentEditable = "false"
+            this.answer.contentEditable = "false"
+            this.answer.classList.add("remove")
+            this.tapeSectionTwo.classList.remove("tape-section-color")
+            this.tapeSectionTwo.title=''
         })
     }
   
@@ -209,13 +223,18 @@ export default class View {
             this.saveButton.classList.remove("remove")
             this.question.contentEditable = "true"
             this.answer.contentEditable = "true"
+            this.tapeSectionOne.title='QUESTION'
+            this.tapeSectionTwo.title='ANSWER'
+            this.tapeSectionTwo.classList.add("tape-section-color")
+            this.tapeSectionOne.classList.add("tape-section-color")
         })
     }
 
     bindSaveFlashcard(handler) {
         this.saveButton.addEventListener("click", event => {
+            console.log(this.getElement(".question").textContent)
             console.log(this.question)
-                handler(this.question.value, this.answer.value)
+                handler(this.question.textContent, this.answer.textContent)
 
             this.stopPressCard = false;
             this.question.classList.remove("align-text-edit")
@@ -231,6 +250,30 @@ export default class View {
         })
     }
 
+    bindEditFlashcard(handler) {
+        this.editFlashcardButton.addEventListener("click", event => {
+            handler()
+            event.stopPropagation()
+            this.stopPressCard = true;
+            this.question.classList.add("align-text-edit")
+            this.question.innerHTML = this.question.innerHTML
+            this.answer.classList.add("align-text-edit")
+            this.answer.innerHTML = this.answer.innerHTML
+            this.answer.classList.remove("remove")
+            this.question.classList.remove("remove")
+            this.pressForAnswer.innerHTML = "PRESS QUESTION AND ANSWER TO EDIT"
+            this.editFlashcardButton.classList.add("remove")
+            this.deleteFlashcardButton.classList.remove("remove")
+            this.saveButton.classList.remove("remove")
+            this.question.contentEditable = "true"
+            this.answer.contentEditable = "true"
+
+            this.tapeSectionOne.title='QUESTION'
+            this.tapeSectionTwo.title='ANSWER'
+            this.tapeSectionTwo.classList.add("tape-section-color")
+            this.tapeSectionOne.classList.add("tape-section-color")
+        })
+    }
 
   }
 
