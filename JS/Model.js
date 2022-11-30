@@ -29,8 +29,9 @@ export default class Model {
        this.flashcards = this.flashcards.map((flashcard) => 
             flashcard.id === id ? {id: flashcard.id, question: updatedQuestion, answer: updatedAnswer} : flashcard,
         )
-
+        this.currentFlashcard = this.flashcards[id - 1]
         this.onFlashcardChanged(this.currentFlashcard)
+        this.onCounterChanged(this.counterChanged())
     }
   
     deleteFlashcard(id) {

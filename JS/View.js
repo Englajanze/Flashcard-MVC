@@ -1,6 +1,7 @@
 export default class View {
     constructor() {
         let stopPressCard = false;
+        let addFlashcard = false;
 
         this.app = this.getElement("#root")
   
@@ -136,6 +137,7 @@ export default class View {
     bindDeleteFlashcard(handler) {
         this.deleteFlashcardButton.addEventListener('click', event => {
             event.stopPropagation()
+            // TODO: Update path with composedPath
               const id = parseInt(event.path[2].childNodes[1].id)
              handler(id)
             console.log(event)
@@ -210,6 +212,7 @@ export default class View {
     bindAddFlashcard(handler) {
         this.addFlashcardButton.addEventListener("click", event => {
             handler()
+            this.addFlashcard = true;
             this.stopPressCard = true;
             this.question.classList.add("align-text-edit")
             this.question.innerHTML = "Question"
@@ -232,21 +235,29 @@ export default class View {
 
     bindSaveFlashcard(handler) {
         this.saveButton.addEventListener("click", event => {
-            console.log(this.getElement(".question").textContent)
-            console.log(this.question)
+            if (this.addFlashcard) { // add flashcard
                 handler(this.question.textContent, this.answer.textContent)
-
+                this.addFlashcard = false;
+            } else { // edit flashcard
+                // TODO: Update path with composedPath
+            const id = parseInt(event.path[2].childNodes[1].id)
+                handler(this.question.textContent, this.answer.textContent, id)
+            
+        }
+            event.stopPropagation()
             this.stopPressCard = false;
             this.question.classList.remove("align-text-edit")
             this.answer.classList.remove("align-text-edit")
             this.answer.classList.add("remove")
-            this.question.classList.add("remove")
+            this.question.classList.remove("remove")
             this.pressForAnswer.innerHTML = "PRESS TO SEE ANSWER"
             this.editFlashcardButton.classList.remove("remove")
             this.deleteFlashcardButton.classList.add("remove")
             this.saveButton.classList.add("remove")
             this.question.contentEditable = "false"
             this.answer.contentEditable = "false"
+            this.tapeSectionTwo.title=''
+            this.tapeSectionTwo.classList.remove("tape-section-color")
         })
     }
 

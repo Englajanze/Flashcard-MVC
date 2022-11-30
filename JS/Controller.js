@@ -14,7 +14,7 @@ export default class Controller {
     this.view.bindPressCard(this.handlePressCard)
     this.view.bindPreviousArrow(this.handlePreviousArrow)
     this.view.bindAddFlashcard(this.handleAddFlashcards)
-    this.view.bindSaveFlashcard(this.handleSaveFlashcards)
+    this.view.bindSaveFlashcard(this.handleSaveFlashcard)
     this.view.bindEditFlashcard(this.handleEditFlashcard)
   
     }
@@ -33,8 +33,8 @@ export default class Controller {
         this.model.addFlashcard(questionText, answerText)
     }
     
-    handleEditFlashcard = (id, updatedQuestionText, updatedAnswerText) => {
-        this.model.editFlashcard(id, updatedQuestionText, updatedAnswerText)
+    handleEditFlashcard = () => {
+
     }
   
     handleDeleteFlashcard = (id) => {
@@ -59,10 +59,15 @@ export default class Controller {
         
     handlePressCard = () => {}
 
-    handleSaveFlashcards = (flashcardQuestion, flashcardAnswer) => {
-        console.log("handleAddFlashcards", flashcardQuestion, flashcardAnswer)
-        this.model.addFlashcard(flashcardQuestion, flashcardAnswer)
+    handleSaveFlashcard = (flashcardQuestion, flashcardAnswer, id) => {
+        if (id) {
+            this.model.editFlashcard(id, flashcardQuestion, flashcardAnswer)
+        } else {
+            this.model.addFlashcard(flashcardQuestion, flashcardAnswer)
+        }
     }
+
+
 
     handleAddFlashcards = () => {}
 

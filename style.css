@@ -66,6 +66,7 @@ html, body, #root {
   border: none;
   padding: 8px;
   font-size: 25px;
+  color: black;
 }
 
 .primary-btn {
@@ -117,6 +118,7 @@ html, body, #root {
   background: none;
   border: none;
   font-size: 25px;
+  -webkit-text-fill-color: black;
 }
 
 .edit-flashcard {
@@ -311,3 +313,25 @@ html, body, #root {
     justify-content: space-between;
   }
   }
+
+  @media (min-width: 992px) {
+    .flashcard-div {
+      height: 60%;
+    }
+    .flashcard-paper {
+      width: 50%;
+      height: 100%;
+      max-width: 80vw;
+    }
+    .arrow-buttons {
+      justify-content: center;
+    }
+    .arrow {
+      margin: 100px;
+    }
+    .top-buttons {
+      width: 50%;
+      margin: auto;
+      justify-content: space-between;
+    }
+    }
