@@ -129,7 +129,7 @@ html, body, #root {
 
 
 .flashcard-note {
-  
+  position: relative;
   background-color: var(--clr-accent-200);
  height: auto;
   width: 86%; 
@@ -137,26 +137,34 @@ html, body, #root {
 }
 
 .pattern {
+  min-height: 150px;
   width: 100%; 
   background-image: linear-gradient(var(--clr-accent-600) 1px, transparent 0px);
   background-size: 100% 2em;
   background-position-y: 1rem;
   line-height: 2em;
+
+
 }
 
 .answer {
+  padding-top: 5px;
   text-align: center;
   font-family: 'Gloria Hallelujah', cursive;
   font-size: 45px;
   font-weight: 600;
+  word-wrap: break-word;
+  line-height: 1.2em;
 }
 
 .question {
-
+  padding-top: 5px;
   text-align: center;
   font-family: 'Gloria Hallelujah', cursive;
   font-size: 45px;
   font-weight: 600;
+  word-wrap: break-word;
+  line-height: 1.2em;
 }
 
 .tape-section {
@@ -270,7 +278,6 @@ html, body, #root {
 .align-text-edit {
   position: relative;
   margin-top: 20px;
-  font-family: 'Baloo Thambi 2', cursive;
 }
 
 .delete-btn, .save-btn {
