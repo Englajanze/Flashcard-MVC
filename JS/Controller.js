@@ -20,7 +20,7 @@ export default class Controller {
     }
   
     onFlashcardChanged = (flashcard) => {
-        this.view.displayFlashcards(flashcard)
+        this.view.displayFlashcard(flashcard)
     }
     
     onCounterChanged = (counterValues) => {
@@ -37,7 +37,11 @@ export default class Controller {
 
     }
   
-    handleDeleteFlashcard = (id) => {
+    handleDeleteFlashcard = (id, addFlashcard) => {
+        if (addFlashcard) {
+            this.onFlashcardChanged(this.model.currentFlashcard)
+            return
+        } 
         this.model.deleteFlashcard(id)
     }
 
