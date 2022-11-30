@@ -286,5 +286,11 @@ export default class View {
         })
     }
 
+    bindReloadPage(handler) {
+        this.homeButton.addEventListener("click", event => {
+            window.location.reload();
+        })
+    }
+
   }
 

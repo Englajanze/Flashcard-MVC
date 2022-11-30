@@ -16,6 +16,7 @@ export default class Controller {
     this.view.bindAddFlashcard(this.handleAddFlashcards)
     this.view.bindSaveFlashcard(this.handleSaveFlashcard)
     this.view.bindEditFlashcard(this.handleEditFlashcard)
+    this.view.bindReloadPage(this.handleReloadPage)
   
     }
   
@@ -70,5 +71,7 @@ export default class Controller {
 
 
     handleAddFlashcards = () => {}
+
+    handleReloadPage = () => {}
 
 }
