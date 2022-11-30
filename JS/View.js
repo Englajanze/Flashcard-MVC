@@ -92,17 +92,12 @@ export default class View {
         this.counter.innerHTML = counterValues
     }
 
-    displayFlashcards(flashcard) {
+    displayFlashcard(flashcard) {
          if (flashcard) {
             // Flashcard
             this.question.innerHTML = flashcard.question
             this.answer.innerHTML = flashcard.answer
             this.flashcardNote.id = flashcard.id
-           
-
-        } else {
-            this.flashcardQuestion.innerHTML = "Add question..."
-            this.flashcardAnswer.innerHTML = ""
         } 
     }
 
@@ -138,10 +133,10 @@ export default class View {
         this.deleteFlashcardButton.addEventListener('click', event => {
             event.stopPropagation()
             // TODO: Update path with composedPath
-              const id = parseInt(event.path[2].childNodes[1].id)
-             handler(id)
-            console.log(event)
+            const id = parseInt(event.path[2].childNodes[1].id)
+            handler(id, this.addFlashcard)
 
+            this.addFlashcard = false;
             this.stopPressCard = false;
             this.question.classList.remove("align-text-edit")
             this.answer.classList.remove("align-text-edit")

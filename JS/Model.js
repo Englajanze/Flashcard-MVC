@@ -1,14 +1,7 @@
 export default class Model {
     constructor() {
-        this.flashcards = [
-            {id: 1, question: "Hello", answer: "Xin chao"},
-            {id: 2, question: "Thank you", answer: "Cam on"},
-            {id: 3, question: "My name is", answer: "Toi la"},
-            {id: 4, question: "How are you?", answer: "Khỏe không?"},
-            {id: 5, question: "Very good, thank you", answer: "Được rồi, cảm ơn cô"}
-        ]
-        if (this.flashcards.length > 0) this.currentFlashcard = this.flashcards[0]
-        else false
+        this.flashcards = JSON.parse(localStorage.getItem('flashcards')) || [{id: 1, question: "Create a flashcard", answer: ":)"}]
+        this.flashcards.length > 0 ? this.currentFlashcard = this.flashcards[0] : false
     }
 
     addFlashcard(question, answer) {
@@ -21,7 +14,7 @@ export default class Model {
 
         this.currentFlashcard = flashcard
   
-        this.onFlashcardChanged(this.currentFlashcard)
+        this._commit()
         this.onCounterChanged(this.counterChanged())
     }
 
@@ -30,7 +23,7 @@ export default class Model {
             flashcard.id === id ? {id: flashcard.id, question: updatedQuestion, answer: updatedAnswer} : flashcard,
         )
         this.currentFlashcard = this.flashcards[id - 1]
-        this.onFlashcardChanged(this.currentFlashcard)
+        this._commit()
         this.onCounterChanged(this.counterChanged())
     }
   
@@ -49,7 +42,7 @@ export default class Model {
             this.currentFlashcard = this.flashcards[index] || this.flashcards[index - 1]
             
             
-            this.onFlashcardChanged(this.currentFlashcard)
+            this._commit()
             this.onCounterChanged(this.counterChanged())
         }
     }
@@ -125,5 +118,10 @@ export default class Model {
     bindCounterChanged(callback) {
         this.onCounterChanged = callback
       }
+
+    _commit() {
+    this.onFlashcardChanged(this.flashcard)
+    localStorage.setItem('flashcards', JSON.stringify(this.flashcards))
+    }
 }
 
