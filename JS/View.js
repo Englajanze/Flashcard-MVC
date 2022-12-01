@@ -1,5 +1,6 @@
 export default class View {
     constructor() {
+        // State
         let stopPressCard = false;
         let addFlashcard = false;
 
@@ -87,25 +88,26 @@ export default class View {
   
     }
   
-    displayCounter(counterValues) {
-        // Counter
-        this.counter.innerHTML = counterValues
-    }
-
+  
+    // Flashcard
     displayFlashcard(flashcard) {
          if (flashcard) {
-            // Flashcard
             this.question.innerHTML = flashcard.question
             this.answer.innerHTML = flashcard.answer
             this.flashcardNote.id = flashcard.id
-        } 
+        } else {
+            this.question.innerHTML = "Add a flashcard..."
+            this.answer.innerHTML = ":)"
+        }
     }
 
-  /*   get _flashcardQuestion() {
-        return this.question.value
+    // Counter
+    displayCounter(counterValues) {
+        this.counter.innerHTML = counterValues
     }
 
-    get _flashcardAnswer() {
+
+   /* get _flashcardAnswer() {
         return this.answer.value
     } */
 

@@ -14,7 +14,7 @@ export default class Model {
 
         this.currentFlashcard = flashcard
   
-        this._commit()
+        this._commit(this.currentFlashcard)
         this.onCounterChanged(this.counterChanged())
     }
 
@@ -23,7 +23,7 @@ export default class Model {
             flashcard.id === id ? {id: flashcard.id, question: updatedQuestion, answer: updatedAnswer} : flashcard,
         )
         this.currentFlashcard = this.flashcards[id - 1]
-        this._commit()
+        this._commit(this.currentFlashcard)
         this.onCounterChanged(this.counterChanged())
     }
   
@@ -42,7 +42,7 @@ export default class Model {
             this.currentFlashcard = this.flashcards[index] || this.flashcards[index - 1]
             
             
-            this._commit()
+            this._commit(this.currentFlashcard)
             this.onCounterChanged(this.counterChanged())
         }
     }
@@ -119,8 +119,8 @@ export default class Model {
         this.onCounterChanged = callback
       }
 
-    _commit() {
-    this.onFlashcardChanged(this.flashcard)
+    _commit(flashcard) {
+    this.onFlashcardChanged(flashcard)
     localStorage.setItem('flashcards', JSON.stringify(this.flashcards))
     }
 }
