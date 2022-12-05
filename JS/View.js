@@ -134,8 +134,9 @@ export default class View {
     bindDeleteFlashcard(handler) {
         this.deleteFlashcardButton.addEventListener('click', event => {
             event.stopPropagation()
+           let path =  event.path || (event.composedPath && event.composedPath());
             // TODO: Update path with composedPath
-            const id = parseInt(event.path[2].childNodes[1].id)
+            const id = parseInt(path[2].childNodes[1].id)
             handler(id, this.addFlashcard)
 
             this.addFlashcard = false;
