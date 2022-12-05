@@ -238,7 +238,8 @@ export default class View {
                 this.addFlashcard = false;
             } else { // edit flashcard
                 // TODO: Update path with composedPath
-            const id = parseInt(event.path[2].childNodes[1].id)
+            let path =  event.path || (event.composedPath && event.composedPath());
+            const id = parseInt(path[2].childNodes[1].id)
                 handler(this.question.textContent, this.answer.textContent, id)
             
         }
