@@ -81,6 +81,7 @@ html, body, #root {
   font-family: 'Baloo Thambi 2', cursive;
   border-width: 1.25px;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 10px;
+  border-style: solid;
 }
 
 .button-wrapper {
@@ -304,13 +305,6 @@ html, body, #root {
 }
 
 @media (min-width: 1200px) {
-  .flashcard-div {
-    height: 60%;
-  }
-  .flashcard-paper {
-    width: 50%;
-    height: 100%;
-  }
   .arrow-buttons {
     justify-content: center;
   }
@@ -322,16 +316,14 @@ html, body, #root {
     margin: auto;
     justify-content: space-between;
   }
+  .press-answer {
+    margin: auto;
+  }
   }
 
   @media (min-width: 992px) {
-    .flashcard-div {
-      height: 60%;
-    }
     .flashcard-paper {
-      width: 50%;
-      height: 100%;
-      max-width: 80vw;
+      max-width: 60vw;
     }
     .arrow-buttons {
       justify-content: center;
@@ -343,5 +335,8 @@ html, body, #root {
       width: 50%;
       margin: auto;
       justify-content: space-between;
+    }
+    .press-answer {
+      margin: auto;
     }
     }
